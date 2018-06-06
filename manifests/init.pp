@@ -1,4 +1,4 @@
-class je_firewall (
+class jefirewall (
   Boolean $inherit_defaults = true,
   Hash $rules               = {},
   Boolean $purge            = true,
@@ -9,15 +9,15 @@ class je_firewall (
   }
 
   Firewall {
-    before  => Class['je_firewall::post'],
-    require => Class['je_firewall::pre'],
+    before  => Class['jefirewall::post'],
+    require => Class['jefirewall::pre'],
   }
 
   class { 'firewall': }
 
   Class['firewall::linux']
-  -> class { 'je_firewall::pre':  }
-  -> class { 'je_firewall::post': }
+  -> class { 'jefirewall::pre':  }
+  -> class { 'jefirewall::post': }
 
   # The rules hash is auto-populated from hiera.
   # If we want to inherit_defaults, then we need to use hiera_hash,
@@ -28,10 +28,10 @@ class je_firewall (
     $strategy = 'first'
   }
 
-  $je_firewall_rules = lookup({ name => 'je_firewall::rules', merge => { 'strategy' => $strategy }, })
+  $jefirewall_rules = lookup({ name => 'jefirewall::rules', merge => { 'strategy' => $strategy }, })
 
-  validate_hash($je_firewall_rules)
+  validate_hash($jefirewall_rules)
 
-  create_resources ( 'firewall', $je_firewall_rules )
+  create_resources ( 'firewall', $jefirewall_rules )
 
 }

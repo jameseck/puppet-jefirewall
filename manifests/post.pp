@@ -1,6 +1,6 @@
-# ==Class: je_firewall::post
+# ==Class: jefirewall::post
 #
-class je_firewall::post (
+class jefirewall::post (
   $rules            = {},
   $inherit_defaults = true,
 ) {
@@ -18,10 +18,10 @@ class je_firewall::post (
     $strategy = 'first'
   }
 
-  $je_firewall_post_rules = lookup({ name => 'je_firewall::post::rules', merge => { 'strategy' => $strategy }, })
+  $jefirewall_post_rules = lookup({ name => 'jefirewall::post::rules', merge => { 'strategy' => $strategy }, })
 
-  validate_hash($je_firewall_post_rules)
+  validate_hash($jefirewall_post_rules)
 
-  create_resources('firewall', $je_firewall_post_rules, { 'before' => undef } )
+  create_resources('firewall', $jefirewall_post_rules, { 'before' => undef } )
 
 }
