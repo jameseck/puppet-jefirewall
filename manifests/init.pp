@@ -28,7 +28,7 @@ class jefirewall (
     $strategy = 'first'
   }
 
-  $jefirewall_rules = lookup({ name => 'jefirewall::rules', merge => { 'strategy' => $strategy }, default => {}, })
+  $jefirewall_rules = lookup({ name => 'jefirewall::rules', merge => { 'strategy' => $strategy }, default_value => {}, })
 
   validate_hash($jefirewall_rules)
 
